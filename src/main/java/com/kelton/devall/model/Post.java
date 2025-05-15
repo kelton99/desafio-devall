@@ -1,7 +1,6 @@
 package com.kelton.devall.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
@@ -10,14 +9,16 @@ import java.util.Objects;
 @Table(name = "posts")
 public class Post {
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
     private String titulo;
     private String resumo;
     private String autor;
     private String link;
     private Date data;
 
-    public Post(Long id, String titulo, String resumo, String autor, String link, Date data) {
+    public Post(Integer id, String titulo, String resumo, String autor, String link, Date data) {
         this.id = id;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -26,11 +27,11 @@ public class Post {
         this.data = data;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

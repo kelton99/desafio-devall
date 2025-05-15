@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-post
+      author: kelton
+      changes:
+        - createTable:
+            tableName: clicks
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: INT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_click_post
+                    references: posts(id)
+              - column:
+                  name: data
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

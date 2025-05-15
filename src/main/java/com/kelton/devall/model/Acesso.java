@@ -1,16 +1,17 @@
 package com.kelton.devall.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "clicks")
 public class Acesso {
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name="post_id", referencedColumnName = "id", nullable=false)
@@ -18,17 +19,17 @@ public class Acesso {
 
     private Date data;
 
-    public Acesso(Long id, Post post, Date data) {
+    public Acesso(Integer id, Post post, Date data) {
         this.id = id;
         this.post = post;
         this.data = data;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
