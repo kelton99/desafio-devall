@@ -35,12 +35,14 @@ Utiliza a especificação da Open Api para automaticamente gerar documentação 
 
 ### **Como executar o projeto**
 Certifique-se de estar com o terminal na raiz do projeto e rode os seguintes comandos.
-  ```bash
+```bash
   docker-compose up -d
- ```
+```
 Para subir o banco de dados, em seguida
+
 ```bash
 ./gradlew bootRun
 ```
 Para executar o projeto, as migrations serão executadas automaticamente.
  
+Em seguida acesse o endereço `http://localhost:8080/swagger-ui/index.html` para testar a API no ambiente Swagger

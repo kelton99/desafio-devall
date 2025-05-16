@@ -40,7 +40,7 @@ public class PostController {
             this.acessoRepository.save(new Acesso(post, Instant.now()));
             return ResponseEntity.ok(post.getUrl());
         }).orElse(
-                ResponseEntity.badRequest().build()
+                ResponseEntity.notFound().build()
         );
     }
 }
