@@ -30,7 +30,6 @@ public class PostController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size) {
         final Pageable pageable = PageRequest.of(page, size);
-        pageable.
         final Page<Post> posts = this.postRepository.searchPosts(termo, pageable);
         return ResponseEntity.ok(posts);
     }
