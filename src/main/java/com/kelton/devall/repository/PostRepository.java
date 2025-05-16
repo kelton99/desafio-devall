@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    @Query("SELECT p.id, p.titulo, p.resumo, p.autor, p.data FROM Post p WHERE p.titulo LIKE %:termo%")
+    @Query("SELECT p.id, p.titulo, p.resumo, p.autor, p.data FROM Post p WHERE p.titulo LIKE %:termo% ORDER BY p.data DESC")
     Page<Post> searchPosts(@Param("termo") String termo, Pageable pageable);
 
 }
