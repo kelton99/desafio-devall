@@ -1,14 +1,16 @@
 package com.kelton.devall.controller;
 
+import com.kelton.devall.model.Acesso;
 import com.kelton.devall.model.Post;
 import com.kelton.devall.repository.AcessoRepository;
 import com.kelton.devall.repository.PostRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 public class PostController {
@@ -22,14 +24,23 @@ public class PostController {
     }
 
     //TODO
-    @GetMapping()
-    public ResponseEntity<Page<Post>> searchPosts(@PathVariable String termo) {
-        return null;
+    @GetMapping("/api/v2/post")
+    public ResponseEntity<Page<Post>> searchPosts(
+            @RequestParam(defaultValue = "") String termo,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        final Pageable pageable = PageRequest.of(page, size);
+        final Page<Post> posts = this.postRepository.searchPosts(termo, pageable);
+        return ResponseEntity.ok(posts);
     }
 
-    @PostMapping()
-    public ResponseEntity<?> acessarPost(@PathVariable Long id) {
-
-        return null;
+    @PostMapping("post/clique/{id}")
+    public ResponseEntity<String> acessarPost(@PathVariable(name = "id") Integer postId) {
+        return this.postRepository.findById(postId).map(post -> {
+            this.acessoRepository.save(new Acesso(post, new Date()));
+            return ResponseEntity.ok(post.getUrl());
+        }).orElse(
+                ResponseEntity.badRequest().build()
+        );
     }
 }

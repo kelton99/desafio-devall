@@ -2,12 +2,13 @@ package com.kelton.devall.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,15 +16,17 @@ public class Post {
     private String titulo;
     private String resumo;
     private String autor;
-    private String link;
+    private String url;
     private Date data;
 
-    public Post(Integer id, String titulo, String resumo, String autor, String link, Date data) {
+    public Post() { }
+
+    public Post(Integer id, String titulo, String resumo, String autor, String url, Date data) {
         this.id = id;
         this.titulo = titulo;
         this.resumo = resumo;
+        this.url = url;
         this.autor = autor;
-        this.link = link;
         this.data = data;
     }
 
@@ -59,12 +62,12 @@ public class Post {
         this.autor = autor;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getData() {

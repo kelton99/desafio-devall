@@ -19,8 +19,9 @@ public class Acesso {
 
     private Date data;
 
-    public Acesso(Integer id, Post post, Date data) {
-        this.id = id;
+    public Acesso() { }
+
+    public Acesso(Post post, Date data) {
         this.post = post;
         this.data = data;
     }

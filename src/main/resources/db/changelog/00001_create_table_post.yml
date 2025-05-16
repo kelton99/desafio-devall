@@ -23,7 +23,7 @@ databaseChangeLog:
                   name: autor
                   type: VARCHAR(255)
               - column:
-                  name: link
+                  name: url
                   type: VARCHAR(255)
               - column:
                   name: data
