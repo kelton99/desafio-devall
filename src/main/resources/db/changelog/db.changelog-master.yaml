@@ -1,5 +1,7 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/00001_create_table_post.yml
+      file: db/changelog/00001_create_table_post.sql
   - include:
-      file: db/changelog/00002_create_table_clicks.yml
+      file: db/changelog/00002_create_table_clicks.sql
+  - include:
+      file: db/changelog/00003_populate_table_post.sql

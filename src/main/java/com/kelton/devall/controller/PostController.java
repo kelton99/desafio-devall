@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.Instant;
 
 @RestController
 public class PostController {
@@ -28,8 +28,9 @@ public class PostController {
     public ResponseEntity<Page<Post>> searchPosts(
             @RequestParam(defaultValue = "") String termo,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "3") int size) {
         final Pageable pageable = PageRequest.of(page, size);
+        pageable.
         final Page<Post> posts = this.postRepository.searchPosts(termo, pageable);
         return ResponseEntity.ok(posts);
     }
@@ -37,7 +38,7 @@ public class PostController {
     @PostMapping("post/clique/{id}")
     public ResponseEntity<String> acessarPost(@PathVariable(name = "id") Integer postId) {
         return this.postRepository.findById(postId).map(post -> {
-            this.acessoRepository.save(new Acesso(post, new Date()));
+            this.acessoRepository.save(new Acesso(post, Instant.now()));
             return ResponseEntity.ok(post.getUrl());
         }).orElse(
                 ResponseEntity.badRequest().build()

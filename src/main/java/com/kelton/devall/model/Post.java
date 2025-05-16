@@ -3,6 +3,8 @@ package com.kelton.devall.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,17 +13,17 @@ import java.util.Objects;
 public class Post implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String resumo;
     private String autor;
     private String url;
-    private Date data;
+    private Instant data;
 
     public Post() { }
 
-    public Post(Integer id, String titulo, String resumo, String autor, String url, Date data) {
+    public Post(Integer id, String titulo, String resumo, String autor, String url, Instant data) {
         this.id = id;
         this.titulo = titulo;
         this.resumo = resumo;
@@ -70,11 +72,11 @@ public class Post implements Serializable {
         this.url = url;
     }
 
-    public Date getData() {
+    public Instant getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Instant data) {
         this.data = data;
     }
 

@@ -2,26 +2,29 @@ package com.kelton.devall.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
+
 
 @Entity
 @Table(name = "clicks")
 public class Acesso {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name="post_id", referencedColumnName = "id", nullable=false)
     private Post post;
 
-    private Date data;
+    private Instant data;
 
     public Acesso() { }
 
-    public Acesso(Post post, Date data) {
+    public Acesso(Post post, Instant data) {
         this.post = post;
         this.data = data;
     }
@@ -42,11 +45,11 @@ public class Acesso {
         this.post = post;
     }
 
-    public Date getData() {
+    public Instant getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(Instant data) {
         this.data = data;
     }
 
