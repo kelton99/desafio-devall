@@ -7,6 +7,7 @@ import com.kelton.devall.repository.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,6 @@ public class PostController {
         this.acessoRepository = acessoRepository;
     }
 
-    //TODO
     @GetMapping("/api/v2/post")
     public ResponseEntity<Page<Post>> searchPosts(
             @RequestParam(defaultValue = "") String termo,
@@ -40,7 +40,7 @@ public class PostController {
             this.acessoRepository.save(new Acesso(post, Instant.now()));
             return ResponseEntity.ok(post.getUrl());
         }).orElse(
-                ResponseEntity.notFound().build()
+            new ResponseEntity<>("Post com id %d não encontrado".formatted(postId), HttpStatus.NOT_FOUND)
         );
     }
 }
